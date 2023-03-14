@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 router.get("/", getPosts);
-// router.get("/:id", getPost);
+router.get("/:id", getPost);
 router.get("/:id", addPost);
 router.get("/:id", editPost);
 router.get("/:id", deletePost);
