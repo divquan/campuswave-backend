@@ -28,4 +28,4 @@ app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/health", (req, res) => res.status(200));
 
-app.listen(5000, () => console.log("Connected"));
+app.listen(10000, () => console.log("Connected"));
