@@ -57,3 +57,6 @@ export const logout = (req, res) => {
     .status(200)
     .json("User successfully logged out");
 };
+export const health = (req, res) => {
+  res.status(200).json("Site health check");
+};
