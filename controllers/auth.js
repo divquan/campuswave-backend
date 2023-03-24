@@ -29,16 +29,12 @@ export const login = (req, res) => {
   const q = "SELECT * FROM users WHERE username=?";
   db.query(q, [req.body.username], (err, data) => {
     if (err) return console.log(err);
-    // if (err) return res.json(err);
     if (data.length == 0) return res.status(404).json("User not found!");
-
-    //checking password
 
     const isPassword = bcrypt.compareSync(req.body.password, data[0].password);
     if (!isPassword) return res.status(400).json("Wrong username or password");
-    //log the user in
 
-    const token = jwt.sign({ id: data[0].id }, "jwtkey");
+    const token = jwt.sign({ id: data[0].id }, "holy#$");
     const { password, ...other } = data[0];
 
     res
