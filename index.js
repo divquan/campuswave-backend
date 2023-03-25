@@ -17,7 +17,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
-app.use("/upload", uploadRoutes);
+app.use("/api/upload", uploadRoutes);
 app.get("/health", (req, res) => res.status(200));
 
 app.listen(10000, () => console.log("Connected"));
