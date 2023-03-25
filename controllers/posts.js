@@ -36,6 +36,7 @@ export const addPost = (req, res) => {
     req.body.description,
     req.body.category,
     req.body.uid,
+    req.body.url,
   ];
   db.query(q, [values], (err, data) => {
     if (err) return res.json(err);
