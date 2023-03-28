@@ -1,9 +1,4 @@
 import { db } from "../db.js";
-import { fileURLToPath } from "url";
-import path from "path";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export const getPosts = (req, res) => {
   const q = req.query.cat
@@ -39,7 +34,7 @@ export const addPost = (req, res) => {
     req.body.url,
   ];
   db.query(q, [values], (err, data) => {
-    if (err) return res.json(err);
+    if (err) return res.json(err).status(404);
     return res.status(200).json("Post successfully created");
   });
   console.log(values);
