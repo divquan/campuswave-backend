@@ -44,6 +44,8 @@ CLOUDINARY_API_SECRET=<your Cloudinary API secret>
 ``` node
 npm start```
 
+
+
 The server will be running at http://localhost:5000.
     
 ## API Reference
