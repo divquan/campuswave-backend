@@ -42,7 +42,8 @@ CLOUDINARY_API_SECRET=<your Cloudinary API secret>
 
 4. Start the server:
 ```node
-npm start```
+npm start
+```
 
 
 
