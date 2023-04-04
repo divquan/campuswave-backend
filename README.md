@@ -53,20 +53,20 @@ The server will be running at http://localhost:5000.
 
 #### Authentication
 
--`POST /api/auth/register` - Register a new user
--`POST /api/auth/login` - Log in an existing user
--`GET /api/auth/logout `- Log out the current user
--`GET /api/auth/me` - Get the current user's profile
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - Log in an existing user
+- `GET /api/auth/logout `- Log out the current user
+- `GET /api/auth/me` - Get the current user's profile
 
 ####Posts
--`GET /api/posts `- Get all posts
--`POST /api/posts` - Create a new post
--`GET /api/posts/:id` - Get a specific post by ID
--`PUT /api/posts/:id` - Update a specific post by ID
--`DELETE /api/posts/:id` - Delete a specific post by ID
+- `GET /api/posts `- Get all posts
+- `POST /api/posts` - Create a new post
+- `GET /api/posts/:id` - Get a specific post by ID
+- `PUT /api/posts/:id` - Update a specific post by ID
+- `DELETE /api/posts/:id` - Delete a specific post by ID
 
-Images
-`POST /api/upload` - Upload a new image to Cloudinary
+####Images
+- `POST /api/upload` - Upload a new image to Cloudinary
 
 ## Acknowledgements
 
