@@ -1,2 +1,0 @@
-# campuswave-backend
- 
