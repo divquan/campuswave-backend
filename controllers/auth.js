@@ -37,8 +37,11 @@ export const login = (req, res) => {
     const token = jwt.sign({ id: data[0].id }, "holy#$");
     const { password, ...other } = data[0];
 
+    const expiration = new Date();
+    expiration.setHours(expiration.getHours() + 6);
+
     res
-      .cookie("access_token", token, { httpOnly: true })
+      .cookie("access_token", token, { httpOnly: true, expires: expiration })
       .status(200)
       .json(other);
   });

@@ -37,9 +37,22 @@ export const addPost = (req, res) => {
     if (err) return res.json(err).status(404);
     return res.status(200).json("Post successfully created");
   });
-  console.log(values);
 };
 
-export const editPost = (req, res) => {};
+export const editPost = (req, res) => {
+  const q =
+    "UPDATE INTO posts(`title`, `description`,  `category`, `uid`, `img`) VALUES (?)";
+  const values = [
+    req.body.title,
+    req.body.description,
+    req.body.category,
+    req.body.uid,
+    req.body.url,
+  ];
+  db.query(q, [values], (err, data) => {
+    if (err) return res.json(err).status(404);
+    return res.status(200).json("Post successfully created");
+  });
+};
 
 export const deletePost = (req, res) => {};
