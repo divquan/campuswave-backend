@@ -9,7 +9,6 @@ import fileUpload from "express-fileupload";
 
 const app = express();
 
-// app.use(express.json());
 app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -19,5 +18,4 @@ app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/upload", uploadRoutes);
 app.get("/health", (req, res) => res.status(200));
-
 app.listen(10000, () => console.log("Connected"));

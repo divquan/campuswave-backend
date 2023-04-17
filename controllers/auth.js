@@ -41,7 +41,7 @@ export const login = (req, res) => {
     expiration.setHours(expiration.getHours() + 6);
 
     res
-      .cookie("access_token", token, { httpOnly: true, expires: expiration })
+      .cookie("access_token", token, { httpOnly: true, expire: expiration })
       .status(200)
       .json(other);
   });
@@ -56,6 +56,22 @@ export const logout = (req, res) => {
     .status(200)
     .json("User successfully logged out");
 };
+
+export const editUserInfo = (req, res) => {
+  const q = "UPDATE INTO users(`email`,  `username`) values (?)";
+  const values = [req.body.email, req.body.username];
+  db.query(q, [values], (err, data) => {
+    if (err) return res.json(err).status(404);
+    return res.data
+      .json("User details updated")
+      .status(200)
+      .clearCookie("access_token", {
+        sameSite: "none",
+        secure: true,
+      });
+  });
+};
+
 export const health = (req, res) => {
   res.status(200).json("Site health check");
 };
