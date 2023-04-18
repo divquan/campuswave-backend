@@ -12,5 +12,5 @@ router.post("/register", register);
 router.post("/login", login);
 router.post("/logout", logout);
 router.get("/health", health);
-router.get("/edit", editUserInfo);
+router.put("/edit", editUserInfo);
 export default router;

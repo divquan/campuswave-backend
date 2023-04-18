@@ -24,6 +24,8 @@ export const getPost = (req, res) => {
 };
 
 export const addPost = (req, res) => {
+  const token = req.token.access_token;
+  if (!token) return res.status(401).json("Authentification failed");
   const q =
     "INSERT INTO posts(`title`, `description`,  `category`, `uid`, `img`) VALUES (?)";
   const values = [

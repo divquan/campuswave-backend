@@ -25,7 +25,7 @@ export const register = (req, res) => {
 };
 
 export const login = (req, res) => {
-  //check if user exists
+  // check if user exists
   const q = "SELECT * FROM users WHERE username=?";
   db.query(q, [req.body.username], (err, data) => {
     if (err) return console.log(err);
@@ -36,9 +36,6 @@ export const login = (req, res) => {
 
     const token = jwt.sign({ id: data[0].id }, "holy#$");
     const { password, ...other } = data[0];
-
-    const expiration = new Date();
-    expiration.setHours(expiration.getHours() + 6);
 
     res
       .cookie("access_token", token, {
@@ -61,6 +58,8 @@ export const logout = (req, res) => {
 };
 
 export const editUserInfo = (req, res) => {
+  const token = req.token.access_token;
+  if (!token) return res.json("Not authenticated");
   const q = "UPDATE INTO users(`email`,  `username`) values (?)";
   const values = [req.body.email, req.body.username];
   db.query(q, [values], (err, data) => {
