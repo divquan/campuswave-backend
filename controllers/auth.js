@@ -40,7 +40,6 @@ export const login = (req, res) => {
     res
       .cookie("access_token", token, {
         httpOnly: true,
-        expires: new Date(Date.now() + 43200000),
       })
       .status(200)
       .json(other);
