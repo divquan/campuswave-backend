@@ -12,7 +12,6 @@ export const getPosts = (req, res) => {
 };
 
 export const getPost = (req, res) => {
-  console.log("ure");
   const q =
     "SELECT p.id, `username`, `title`, `description`, p.img, u.img AS userImg, `category`,`date` FROM users u JOIN posts p ON u.id = p.uid WHERE p.id = ? ";
 
@@ -24,8 +23,6 @@ export const getPost = (req, res) => {
 };
 
 export const addPost = (req, res) => {
-  const token = req.token.access_token;
-  if (!token) return res.status(401).json("Authentification failed");
   const q =
     "INSERT INTO posts(`title`, `description`,  `category`, `uid`, `img`) VALUES (?)";
   const values = [
@@ -53,7 +50,7 @@ export const editPost = (req, res) => {
   ];
   db.query(q, [values], (err, data) => {
     if (err) return res.json(err).status(404);
-    return res.status(200).json("Post successfully created");
+    return res.status(200).json("Post successfully edited");
   });
 };
 
