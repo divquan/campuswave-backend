@@ -12,12 +12,7 @@ const app = express();
 app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: ["https://campuswave.netlify.app", "http://localhost:3000"],
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);

@@ -47,7 +47,7 @@ export const editPost = (req, res) => {
     req.body.category,
     req.body.id,
   ];
-  db.query(q, [values], (err, data) => {
+  db.query(q, ...values, (err, data) => {
     if (err) return res.json(err).status(404);
     return res.status(200).json("Post successfully updated");
   });

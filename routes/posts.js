@@ -12,6 +12,6 @@ router.get("/", getPosts);
 router.get("/:id", getPost);
 router.post("/", addPost);
 router.put("/", editPost);
-router.get("/:id", deletePost);
+router.delete("/:id", deletePost);
 
 export default router;
