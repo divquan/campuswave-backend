@@ -41,7 +41,9 @@ export const login = (req, res) => {
       .cookie("access_token", token, {
         httpOnly: true,
         secure: true,
-        maxAge: 1000 * 60 * 60 * 24 * 7, //7 day
+        sameSite: "none",
+        maxAge: 1000 * 60 * 60 * 24 * 7, //7 days
+        path: "/",
       })
       .status(200)
       .json(other);
