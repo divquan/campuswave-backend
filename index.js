@@ -12,7 +12,7 @@ const app = express();
 app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({ credentials: true }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
