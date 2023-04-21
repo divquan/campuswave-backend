@@ -40,14 +40,15 @@ export const addPost = (req, res) => {
 
 export const editPost = (req, res) => {
   const q =
-    "UPDATE posts SET title = ?, description = ?, category = ? WHERE id = ?";
+    "UPDATE posts SET `title`=?,`description`=?,`category`=? WHERE `id` = ?";
+
   const values = [
     req.body.title,
     req.body.description,
     req.body.category,
     req.body.id,
   ];
-  db.query(q, ...values, (err, data) => {
+  db.query(q, values, (err, data) => {
     if (err) return res.json(err).status(404);
     return res.status(200).json("Post successfully updated");
   });
