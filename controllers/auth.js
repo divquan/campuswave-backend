@@ -24,6 +24,50 @@ export const register = (req, res) => {
   });
 };
 
+export const login3 = (req, res) => {
+  // check if user exists
+  const q = "SELECT * FROM users WHERE username=?";
+  db.query(q, [req.body.username], (err, data) => {
+    if (err) return console.log(err);
+    if (data.length == 0) return res.status(404).json("User not found!");
+
+    const isPassword = bcrypt.compareSync(req.body.password, data[0].password);
+    if (!isPassword) return res.status(400).json("Wrong username or password");
+
+    const token = jwt.sign({ id: data[0].id }, "holy#$");
+    const { password, ...other } = data[0];
+
+    res
+      .cookie("access_token", token, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      })
+      .status(200)
+      .json(other);
+  });
+};
+export const login2 = (req, res) => {
+  // check if user exists
+  const q = "SELECT * FROM users WHERE username=?";
+  db.query(q, [req.body.username], (err, data) => {
+    if (err) return console.log(err);
+    if (data.length == 0) return res.status(404).json("User not found!");
+
+    const isPassword = bcrypt.compareSync(req.body.password, data[0].password);
+    if (!isPassword) return res.status(400).json("Wrong username or password");
+
+    const token = jwt.sign({ id: data[0].id }, "holy#$");
+    const { password, ...other } = data[0];
+
+    res
+      .cookie("access_token", token, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 7, //7 days
+      })
+      .status(200)
+      .json(other);
+  });
+};
 export const login = (req, res) => {
   // check if user exists
   const q = "SELECT * FROM users WHERE username=?";
@@ -43,7 +87,6 @@ export const login = (req, res) => {
         secure: true,
         sameSite: "none",
         maxAge: 1000 * 60 * 60 * 24 * 7, //7 days
-        path: "/",
       })
       .status(200)
       .json(other);
