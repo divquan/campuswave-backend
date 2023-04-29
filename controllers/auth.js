@@ -50,12 +50,15 @@ export const login = (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.status(200).json("User successfully logged out");
+  res
+    .status(200)
+    .json("User successfully logged out")
+    .clearCookie("access_token", {});
 };
 
 export const editUserInfo = (req, res) => {
-  // const token = req.token.access_token;
-  // if (!token) return res.json("Not authenticated");
+  const token = req.token.access_token;
+  if (!token) return res.json("Not authenticated");
   const q = "UPDATE INTO users(`email`,  `username`) values (?)";
   const values = [req.body.email, req.body.username];
   db.query(q, [values], (err, data) => {
@@ -64,8 +67,9 @@ export const editUserInfo = (req, res) => {
       .json("User details updated")
       .status(200)
       .clearCookie("access_token", {
-        sameSite: "none",
+        httpOnly: true,
         secure: true,
+        sameSite: "none",
       });
   });
 };

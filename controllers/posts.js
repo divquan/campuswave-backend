@@ -23,13 +23,29 @@ export const getPost = (req, res) => {
 };
 
 export const addPost = (req, res) => {
+  const token = req.token.access_token;
+  if (!token) return res.json("Not authenticated");
+
+  jwt.verify(token, "jwtkey", (err, userInfo) => {
+    if (err) return res.status(403).json("Token is not valid!");
+  });
+
+  if (
+    !req.body.title ||
+    !req.body.description ||
+    !req.body.url ||
+    !req.body.category
+  )
+    return res.status(400).json("Missing fields");
+  if (!req.body.category) return res.status(400).json("Missing category");
+
   const q =
     "INSERT INTO posts(`title`, `description`,  `category`, `uid`, `img`) VALUES (?)";
   const values = [
     req.body.title,
     req.body.description,
     req.body.category,
-    req.body.uid,
+    userInfo.id,
     req.body.url,
   ];
   db.query(q, [values], (err, data) => {
@@ -39,6 +55,13 @@ export const addPost = (req, res) => {
 };
 
 export const editPost = (req, res) => {
+  const token = req.token.access_token;
+  if (!token) return res.json("Not authenticated");
+
+  jwt.verify(token, "jwtkey", (err, userInfo) => {
+    if (err) return res.status(403).json("Token is not valid!");
+  });
+
   const q =
     "UPDATE posts SET `title`=?,`description`=?,`category`=? WHERE `id` = ?";
 
@@ -46,7 +69,7 @@ export const editPost = (req, res) => {
     req.body.title,
     req.body.description,
     req.body.category,
-    req.body.id,
+    userInfo.id,
   ];
   db.query(q, values, (err, data) => {
     if (err) return res.json(err).status(404);
@@ -55,6 +78,12 @@ export const editPost = (req, res) => {
 };
 
 export const deletePost = (req, res) => {
+  const token = req.token.access_token;
+  if (!token) return res.json("Not authenticated");
+
+  jwt.verify(token, "jwtkey", (err, userInfo) => {
+    if (err) return res.status(403).json("Token is not valid!");
+  });
   const q = "DELETE FROM posts WHERE id = ?";
   db.query(q, [req.params.id], (err, data) => {
     if (err) return res.json(err).status(404);
