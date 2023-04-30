@@ -18,7 +18,7 @@ export const upload = (req, res) => {
   }
   const token = req.cookies.access_token;
   if (!token) return res.json("Not authenticated");
-  jwt.verify(token, "holy#$", (err, userInfo) => {
+  jwt.verify(token, "holy#$", (err) => {
     if (err) return res.status(403).json("Token is not valid!");
   });
 
