@@ -51,13 +51,12 @@ export const login = (req, res) => {
 
 export const logout = (req, res) => {
   res
-    .status(200)
-    .json("User successfully logged out")
     .clearCookie("access_token", {
-      httpOnly: true,
       secure: true,
       sameSite: "none",
-    });
+    })
+    .status(200)
+    .json("User successfully logged out");
 };
 
 export const editUserInfo = (req, res) => {
