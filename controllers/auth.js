@@ -53,7 +53,11 @@ export const logout = (req, res) => {
   res
     .status(200)
     .json("User successfully logged out")
-    .clearCookie("access_token", {});
+    .clearCookie("access_token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
 };
 
 export const editUserInfo = (req, res) => {
