@@ -15,6 +15,11 @@ export const upload = (req, res) => {
   if (!req.files || !req.files.file) {
     return res.status(400).json({ error: "No file uploaded" });
   }
+  const token = req.cookies.access_token;
+  if (!token) return res.json("Not authenticated");
+  jwt.verify(token, "jwtkey", (err, userInfo) => {
+    if (err) return res.status(403).json("Token is not valid!");
+  });
 
   const fileBuffer = req.files.file.data;
   const uploadStream = cloudinary.uploader.upload_stream((err, result) => {

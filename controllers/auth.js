@@ -57,7 +57,7 @@ export const logout = (req, res) => {
 };
 
 export const editUserInfo = (req, res) => {
-  const token = req.token.access_token;
+  const token = req.access_token.access_token;
   if (!token) return res.json("Not authenticated");
   const q = "UPDATE INTO users(`email`,  `username`) values (?)";
   const values = [req.body.email, req.body.username];

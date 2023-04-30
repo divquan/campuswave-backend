@@ -23,7 +23,7 @@ export const getPost = (req, res) => {
 };
 
 export const addPost = (req, res) => {
-  const token = req.token.access_token;
+  const token = req.cookies.access_token;
   if (!token) return res.json("Not authenticated");
 
   jwt.verify(token, "jwtkey", (err, userInfo) => {
@@ -55,7 +55,7 @@ export const addPost = (req, res) => {
 };
 
 export const editPost = (req, res) => {
-  const token = req.token.access_token;
+  const token = req.cookies.access_token;
   if (!token) return res.json("Not authenticated");
 
   jwt.verify(token, "jwtkey", (err, userInfo) => {
@@ -78,7 +78,7 @@ export const editPost = (req, res) => {
 };
 
 export const deletePost = (req, res) => {
-  const token = req.token.access_token;
+  const token = req.cookies.access_token;
   if (!token) return res.json("Not authenticated");
 
   jwt.verify(token, "jwtkey", (err, userInfo) => {
