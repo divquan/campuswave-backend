@@ -1,4 +1,5 @@
 import { db } from "../db.js";
+import jwt from "jsonwebtoken";
 
 export const getPosts = (req, res) => {
   const q = req.query.cat

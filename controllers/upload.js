@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
 dotenv.config();
 const { CLOUD_NAME, API_KEY, API_SECRET } = process.env;
+import jwt from "jsonwebtoken";
 
 cloudinary.config({
   cloud_name: CLOUD_NAME,
