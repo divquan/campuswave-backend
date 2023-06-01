@@ -1,0 +1,11 @@
+###
+PUT  http://localhost:10000/api/auth/edit 
+content-type: application/json
+
+{
+    "username": "test",
+    "email": "test@email.com"
+}
+
+###
+GET http://localhost:10000/health

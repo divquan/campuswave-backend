@@ -14,8 +14,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.get("/", (req, res) => {
+  res.send("Hello, world!");
+});
 app.use("/api/auth", authRoutes);
+app.get("/health", (req, res) => res.status(200).send("OK"));
 app.use("/api/posts", postRoutes);
 app.use("/api/upload", uploadRoutes);
-app.get("/health", (req, res) => res.status(200));
 app.listen(10000, () => console.log("Connected"));
