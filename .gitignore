@@ -1,2 +1,11 @@
-.env
+# Ignore .env files
+*.env
+
+# Ignore the node_modules directory
 /node_modules
+
+# Ignore all files with the .txt extension
+*.txt
+
+#Ignore all files wirh the .http extension
+*.http
