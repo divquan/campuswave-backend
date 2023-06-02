@@ -60,16 +60,15 @@ export const logout = (req, res) => {
 };
 
 export const editUserInfo = (req, res) => {
-  // const token = req.access_token.access_token;
-  // if (!token) return res.json("Not authenticated");
-
-  const q = "UPDATE users SET email=?, username=?";
+  const token = req.access_token.access_token;
+  if (!token) return res.json("Not authenticated");
+  const q = "UPDATE INTO users(`email`,  `username`) values (?)";
   const values = [req.body.email, req.body.username];
-  db.query(q, values, (err, data) => {
+  db.query(q, [values], (err, data) => {
     if (err) return res.json(err).status(404);
-    return res
-      .status(200)
+    return res.data
       .json("User details updated")
+      .status(200)
       .clearCookie("access_token", {
         httpOnly: true,
         secure: true,
