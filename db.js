@@ -1,12 +1,11 @@
 import mysql from "mysql2";
-import dotenv from "dotenv";
-
+import * as dotenv from "dotenv";
 dotenv.config();
 
 const { DATABASE_URL } = process.env;
-export const db = mysql.createPool(DATABASE_URL).promise();
+export const db = mysql.createConnection(process.env.DATABASE_URL);
 
-db.getConnection((error, connection) => {
+db.connect((error) => {
   if (error) {
     console.error("Error connecting to database:", error);
     return;
@@ -15,5 +14,5 @@ db.getConnection((error, connection) => {
 
   // Perform database operations here
 
-  connection.release(); // Release the connection when done
+  //   db.end(); // Close the connection when done
 });
