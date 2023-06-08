@@ -55,19 +55,22 @@ export const logout = (req, res) => {
       secure: true,
       sameSite: "none",
     })
-    .status(200)
+    .sttus(200)
     .json("User successfully logged out");
 };
 
 export const editUserInfo = (req, res) => {
-  const token = req.access_token.access_token;
-  if (!token) return res.json("Not authenticated");
-  const q = "UPDATE INTO users(`email`,  `username`) values (?)";
-  const values = [req.body.email, req.body.username];
-  db.query(q, [values], (err, data) => {
+  // const token = req.access_token.access_token;
+  // if (!token) return res.json("Not authenticated");
+
+  const q = "UPDATE users SET email = ?, username = ?  WHERE id = ?";
+
+  // const q = "UPDATE INTO users(`email`,  `username`) values (?)";
+  const values = [req.body.email, req.body.username, req.body.id];
+  db.query(q, values, (err, data) => {
     if (err) return res.json(err).status(404);
-    return res.data
-      .json("User details updated")
+    return res
+      .send("User details updated")
       .status(200)
       .clearCookie("access_token", {
         httpOnly: true,
