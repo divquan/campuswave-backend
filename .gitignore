@@ -1,11 +1,22 @@
-# Ignore .env files
-*.env
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Ignore the node_modules directory
+# dependencies
 /node_modules
+/.pnp
+.pnp.js
 
-# Ignore all files with the .txt extension
-*.txt
 
-#Ignore all files wirh the .http extension
-*.http
+
+# production
+/build
+
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+

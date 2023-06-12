@@ -5,4 +5,4 @@ dotenv.config();
 const { DATABASE_URL } = process.env;
 export const db = mysql.createConnection(DATABASE_URL);
 console.log("Connected to database!");
-db.end();
+// db.end();
